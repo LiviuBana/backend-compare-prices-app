@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using System.Linq;
 using System.Threading.Tasks;
-using ComparePrices.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -48,7 +48,7 @@ namespace ComparePrices.Controllers
                          select item.Model;
 
             models = models.Distinct();
-
+           
             return await models.ToListAsync();
 
 
@@ -65,7 +65,6 @@ namespace ComparePrices.Controllers
                             select item.Producer;
 
             producers =producers.Distinct();
-
             return await producers.ToListAsync();
 
 
