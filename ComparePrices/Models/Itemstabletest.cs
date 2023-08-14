@@ -21,6 +21,8 @@ public partial class Itemstabletest
 
     public string? Availability { get; set; }
 
+    public string? Logo { get; set; }
+
     public static implicit operator List<object>(Itemstabletest? v)
     {
         throw new NotImplementedException();

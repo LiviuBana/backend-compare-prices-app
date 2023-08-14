@@ -50,6 +50,9 @@ public partial class ProductsContext : DbContext
             entity.Property(e => e.Url)
                 .HasColumnType("text")
                 .HasColumnName("url");
+            entity.Property(e => e.Logo)
+                .HasColumnType("text")
+                .HasColumnName("logo");
         });
 
         OnModelCreatingPartial(modelBuilder);
