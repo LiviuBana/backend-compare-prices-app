@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Products.Data;
 using Products.Models;
@@ -77,10 +70,14 @@ namespace ComparePrices.Controllers
                 return NotFound();
             }
 
-            var phones = from item in _context.Itemstabletests
+            List<Itemstabletest> phones = (from item in _context.Itemstabletests
                          where item.Model.Contains(model)
-                         select item;
-            return await phones.ToListAsync();
+                         select item).ToList();
+
+            List<Itemstabletest> orderedProducts = phones.OrderBy(p => double.Parse(p.Price.Replace(".","").Replace(",","."))).ToList();
+           
+
+            return orderedProducts;
         }
 
 
@@ -111,34 +108,18 @@ namespace ComparePrices.Controllers
                 }
             }
 
-            return  products;
+            List<Itemstabletest>orderedProducts= products.OrderBy(p => double.Parse(p.Price.Replace(".", "").Replace(",", "."))).ToList();
+            
+
+
+            return  orderedProducts;
 
 
         }
 
 
 
-       /* [HttpGet]
-       public IQueryable<ProductsDto> GetProductsByProducer(string producer) {
-
-            var products = from p in _context.Itemstabletests
-                           where p.Producer == producer
-                           select new ProductsDto()
-                           {
-                               Id = p.Id,
-                               title = p.Title,
-                               producer = p.Producer,
-                               model = p.Model,
-                               availability = p.Availability,
-                               url = p.Url,
-
-                           };
-
-
-            return products;
-        
-        }*/
-
+     
 
 
 
